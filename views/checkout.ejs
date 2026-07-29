@@ -1,32 +1,31 @@
 <%- include('partials/header') %>
 
-<section class="section page-header">
+<section class="page-header">
   <div class="container">
-    <h1>Checkout</h1>
-    <p>Complete your order</p>
+    <span class="section-label">Checkout</span>
+    <h1>Complete Your Order</h1>
+    <p>Fill in your details to place your custom order</p>
   </div>
 </section>
 
-<section class="section checkout-page">
+<section class="checkout-page" style="padding-top: 40px;">
   <div class="container">
     <div class="checkout-layout">
       <form class="checkout-form" method="POST" action="/checkout">
         <div class="checkout-section">
           <h2>Contact Information</h2>
-          <div class="form-row">
-            <div class="form-group">
-              <label for="name">Full Name *</label>
-              <input type="text" id="name" name="name" class="form-input" required>
-            </div>
+          <div class="form-group">
+            <label for="name">Full Name *</label>
+            <input type="text" id="name" name="name" class="form-input" required placeholder="John Doe">
           </div>
-          <div class="form-row form-row-2">
+          <div class="form-row-2">
             <div class="form-group">
               <label for="email">Email *</label>
-              <input type="email" id="email" name="email" class="form-input" required>
+              <input type="email" id="email" name="email" class="form-input" required placeholder="john@example.com">
             </div>
             <div class="form-group">
               <label for="phone">Phone *</label>
-              <input type="tel" id="phone" name="phone" class="form-input" required>
+              <input type="tel" id="phone" name="phone" class="form-input" required placeholder="+91 98765 43210">
             </div>
           </div>
         </div>
@@ -34,16 +33,16 @@
           <h2>Shipping Address</h2>
           <div class="form-group">
             <label for="address">Address *</label>
-            <textarea id="address" name="address" class="form-input" rows="2" required></textarea>
+            <textarea id="address" name="address" class="form-input" rows="2" required placeholder="Street, Area, Landmark"></textarea>
           </div>
-          <div class="form-row form-row-2">
+          <div class="form-row-2">
             <div class="form-group">
               <label for="city">City *</label>
-              <input type="text" id="city" name="city" class="form-input" required>
+              <input type="text" id="city" name="city" class="form-input" required placeholder="Mumbai">
             </div>
             <div class="form-group">
               <label for="pincode">Pincode *</label>
-              <input type="text" id="pincode" name="pincode" class="form-input" required>
+              <input type="text" id="pincode" name="pincode" class="form-input" required placeholder="400001">
             </div>
           </div>
         </div>
@@ -52,19 +51,19 @@
           <div class="payment-options">
             <label class="payment-option">
               <input type="radio" name="paymentMethod" value="COD" checked>
-              <span>Cash on Delivery</span>
+              <span>💵 Cash on Delivery</span>
             </label>
             <label class="payment-option">
               <input type="radio" name="paymentMethod" value="UPI">
-              <span>UPI Payment</span>
+              <span>📱 UPI Payment</span>
             </label>
             <label class="payment-option">
               <input type="radio" name="paymentMethod" value="Card">
-              <span>Credit / Debit Card</span>
+              <span>💳 Credit / Debit Card</span>
             </label>
           </div>
         </div>
-        <button type="submit" class="btn btn-primary btn-lg btn-block">Place Order</button>
+        <button type="submit" class="btn btn-primary btn-lg btn-block">Place Order — Secure Checkout</button>
       </form>
       <div class="checkout-summary">
         <h3>Order Summary</h3>

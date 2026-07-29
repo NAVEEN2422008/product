@@ -1,21 +1,25 @@
 <%- include('partials/header') %>
 
-<section class="section page-header">
+<section class="page-header">
   <div class="container">
-    <h1>All Products</h1>
-    <p>Browse our collection of customizable products</p>
+    <span class="section-label"><%= search ? 'Search Results' : currentCategory === 'all' ? 'All Products' : currentCategory.charAt(0).toUpperCase() + currentCategory.slice(1) %></span>
+    <h1><%= search ? `Results for "${search}"` : currentCategory === 'all' ? 'All Products' : currentCategory.charAt(0).toUpperCase() + currentCategory.slice(1) %></h1>
+    <p><%= products.length %> product(s) found</p>
   </div>
 </section>
 
-<section class="section products-page">
+<section class="section" style="padding-top: 40px;">
   <div class="container">
     <div class="products-layout">
       <aside class="filters">
         <h3>Categories</h3>
         <ul class="filter-list">
-          <li><a href="/products" class="<%= currentCategory === 'all' ? 'active' : '' %>">All Products</a></li>
+          <li><a href="/products" class="<%= currentCategory === 'all' ? 'active' : '' %>">All Products <span class="count"><%= allProducts ? allProducts.length : products.length %></span></a></li>
           <% categories.forEach(cat => { %>
-            <li><a href="/products?category=<%= cat %>" class="<%= currentCategory === cat ? 'active' : '' %>"><%= cat.charAt(0).toUpperCase() + cat.slice(1) %></a></li>
+            <li><a href="/products?category=<%= cat %>" class="<%= currentCategory === cat ? 'active' : '' %>">
+              <%= cat.charAt(0).toUpperCase() + cat.slice(1) %>
+              <span class="count"><%= allProducts ? allProducts.filter(p => p.category === cat).length : '' %></span>
+            </a></li>
           <% }) %>
         </ul>
       </aside>
@@ -28,19 +32,27 @@
             <input type="text" name="search" placeholder="Search products..." value="<%= search %>">
             <button type="submit">🔍</button>
           </form>
-          <p><%= products.length %> product(s) found</p>
+          <span class="toolbar-count"><%= products.length %> product(s)</span>
         </div>
         <% if (products.length === 0) { %>
           <div class="empty-state">
-            <p>No products found. Try a different search or category.</p>
+            <span class="icon">🔍</span>
+            <h2>No products found</h2>
+            <p>Try a different search or category</p>
+            <a href="/products" class="btn btn-primary">Clear Filters</a>
           </div>
         <% } else { %>
           <div class="products-grid">
             <% products.forEach(product => { %>
-              <a href="/products/<%= product.id %>" class="product-card">
+              <a href="/products/<%= product.id %>" class="product-card tilt-card">
                 <div class="product-image">
-                  <img src="<%= product.image %>" alt="<%= product.name %>">
-                  <% if (product.badge) { %><span class="badge"><%= product.badge %></span><% } %>
+                  <img src="<%= product.image %>" alt="<%= product.name %>" loading="lazy">
+                  <% if (product.badge) { %>
+                    <span class="badge <%= product.badge === 'Popular' || product.badge === 'Trending' ? 'badge-hot' : product.badge === 'New' ? 'badge-new' : '' %>"><%= product.badge %></span>
+                  <% } %>
+                  <div class="product-card-overlay">
+                    <span class="quick-view-btn">Quick View</span>
+                  </div>
                 </div>
                 <div class="product-info">
                   <span class="product-category"><%= product.category %></span>

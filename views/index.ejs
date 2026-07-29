@@ -1,64 +1,109 @@
 <%- include('partials/header') %>
 
 <section class="hero">
+  <div id="hero-3d-container"></div>
   <div class="container">
     <div class="hero-content">
-      <h1>Make It <span>Yours</span></h1>
-      <p>Custom printed t-shirts, mugs, keychains, photo prints & more — all personalized just for you.</p>
-      <div class="hero-actions">
-        <a href="/products" class="btn btn-primary">Start Customizing</a>
-        <a href="/products?category=t-shirts" class="btn btn-outline">Explore T-Shirts</a>
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        New — AI Design Tools Available
       </div>
-    </div>
-    <div class="hero-visual">
-      <div class="hero-card hero-card-1">👕 Custom T-Shirts</div>
-      <div class="hero-card hero-card-2">☕ Photo Mugs</div>
-      <div class="hero-card hero-card-3">🔑 Name Keychains</div>
-      <div class="hero-card hero-card-4">🖼️ Photo Prints</div>
+      <h1>Make Every Product<br><span class="gradient-text">Uniquely Yours</span></h1>
+      <p>Custom printed t-shirts, mugs, keychains, photo prints & more — all personalized with your vision. Create something unforgettable.</p>
+      <div class="hero-actions">
+        <a href="/products" class="btn btn-primary btn-lg">Start Creating →</a>
+        <a href="/products?category=t-shirts" class="btn btn-outline btn-lg">Explore T-Shirts</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <h3>10K+</h3>
+          <p>Happy Customers</p>
+        </div>
+        <div class="hero-stat">
+          <h3>500+</h3>
+          <p>Daily Orders</p>
+        </div>
+        <div class="hero-stat">
+          <h3>4.9★</h3>
+          <p>Avg. Rating</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="section categories-section">
+<section class="section categories">
   <div class="container">
-    <h2 class="section-title">Shop by Category</h2>
+    <div class="section-header">
+      <span class="section-label">Categories</span>
+      <h2 class="section-title">What Would You Like to Create?</h2>
+      <p class="section-subtitle">Browse our collection and customize every detail. From apparel to accessories, make it yours.</p>
+    </div>
     <div class="categories-grid">
-      <a href="/products?category=t-shirts" class="category-card" style="--cat-color: #6366f1">
-        <span class="cat-icon">👕</span>
+      <a href="/products?category=t-shirts" class="category-card" style="--cat-color: #8b5cf6; --cat-glow: rgba(139,92,246,0.15)">
+        <div class="cat-icon-wrap">👕</div>
         <h3>T-Shirts & Hoodies</h3>
-        <p>Custom printed apparel</p>
+        <p>Custom printed apparel with your designs</p>
+        <span class="cat-arrow">Browse Collection →</span>
       </a>
-      <a href="/products?category=goodies" class="category-card" style="--cat-color: #ec4899">
-        <span class="cat-icon">🎁</span>
+      <a href="/products?category=goodies" class="category-card" style="--cat-color: #ec4899; --cat-glow: rgba(236,72,153,0.15)">
+        <div class="cat-icon-wrap">🎁</div>
         <h3>Printer Goodies</h3>
-        <p>Mugs, cases, bags & more</p>
+        <p>Mugs, cases, bags & accessories</p>
+        <span class="cat-arrow">Browse Collection →</span>
       </a>
-      <a href="/products?category=keychains" class="category-card" style="--cat-color: #f59e0b">
-        <span class="cat-icon">🔑</span>
+      <a href="/products?category=keychains" class="category-card" style="--cat-color: #f59e0b; --cat-glow: rgba(245,158,11,0.15)">
+        <div class="cat-icon-wrap">🔑</div>
         <h3>Name Keychains</h3>
-        <p>Personalized keychains</p>
+        <p>Personalized keychains & name plates</p>
+        <span class="cat-arrow">Browse Collection →</span>
       </a>
-      <a href="/products?category=photos" class="category-card" style="--cat-color: #10b981">
-        <span class="cat-icon">🖼️</span>
+      <a href="/products?category=photos" class="category-card" style="--cat-color: #06b6d4; --cat-glow: rgba(6,182,212,0.15)">
+        <div class="cat-icon-wrap">🖼️</div>
         <h3>Photo Prints</h3>
-        <p>Prints, frames & calendars</p>
+        <p>Prints, frames & photo calendars</p>
+        <span class="cat-arrow">Browse Collection →</span>
       </a>
     </div>
+  </div>
+</section>
+
+<section class="section showcase">
+  <div class="section-header">
+    <span class="section-label">Trending Now</span>
+    <h2 class="section-title">Most Loved Products</h2>
+  </div>
+  <div class="showcase-track">
+    <% for(let i=0; i<2; i++) { %>
+      <% allProducts.forEach(p => { %>
+        <div class="showcase-item">
+          <span class="emoji"><%= p.category === 't-shirts' ? '👕' : p.category === 'goodies' ? '🎁' : p.category === 'keychains' ? '🔑' : '🖼️' %></span>
+          <h4><%= p.name %></h4>
+          <p style="color: var(--primary-light); font-weight: 700; margin-top: 8px;">₹<%= p.price.toLocaleString() %></p>
+        </div>
+      <% }) %>
+    <% } %>
   </div>
 </section>
 
 <section class="section featured-section">
   <div class="container">
     <div class="section-header">
-      <h2 class="section-title">Featured Products</h2>
-      <a href="/products" class="btn btn-outline btn-sm">View All →</a>
+      <span class="section-label">Featured</span>
+      <h2 class="section-title">Bestsellers</h2>
+      <p class="section-subtitle">Our most popular customizable products, loved by thousands</p>
     </div>
     <div class="products-grid">
       <% products.forEach(product => { %>
-        <a href="/products/<%= product.id %>" class="product-card">
+        <a href="/products/<%= product.id %>" class="product-card tilt-card">
           <div class="product-image">
-            <img src="<%= product.image %>" alt="<%= product.name %>">
-            <% if (product.badge) { %><span class="badge"><%= product.badge %></span><% } %>
+            <img src="<%= product.image %>" alt="<%= product.name %>" loading="lazy">
+            <% if (product.badge) { %>
+              <span class="badge <%= product.badge === 'Popular' || product.badge === 'Trending' ? 'badge-hot' : '' %>"><%= product.badge %></span>
+            <% } %>
+            <div class="product-card-overlay">
+              <span class="quick-view-btn">Quick View</span>
+            </div>
           </div>
           <div class="product-info">
             <span class="product-category"><%= product.category %></span>
@@ -69,6 +114,10 @@
                 <span class="original">₹<%= product.originalPrice.toLocaleString() %></span>
               <% } %>
             </div>
+            <div class="product-rating">
+              <span class="stars">★★★★★</span>
+              <span>(128)</span>
+            </div>
           </div>
         </a>
       <% }) %>
@@ -78,26 +127,30 @@
 
 <section class="section features-section">
   <div class="container">
+    <div class="section-header">
+      <span class="section-label">Why Us</span>
+      <h2 class="section-title">Designed for Creators</h2>
+    </div>
     <div class="features-grid">
       <div class="feature-card">
         <div class="feature-icon">🎨</div>
         <h3>Custom Designs</h3>
-        <p>Upload your own designs or choose from templates</p>
+        <p>Upload your own artwork or choose from our library of premium templates</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">🚚</div>
         <h3>Free Delivery</h3>
-        <p>Free shipping on orders above ₹499</p>
+        <p>Free shipping on all orders above ₹499 with 3-5 day delivery</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">💯</div>
+        <div class="feature-icon">💎</div>
         <h3>Premium Quality</h3>
-        <p>High-quality materials & vibrant prints</p>
+        <p>High-quality materials with vibrant, fade-resistant printing technology</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">↩️</div>
         <h3>Easy Returns</h3>
-        <p>7-day return policy on all products</p>
+        <p>Not happy? Return within 7 days for a full refund, no questions asked</p>
       </div>
     </div>
   </div>

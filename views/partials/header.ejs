@@ -3,13 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CustomPrints - Personalized Products</title>
-  <link rel="stylesheet" href="/css/style.css">
+  <title>CustomPrints — Personalized Products</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 </head>
 <body>
-  <header class="header">
+  <header class="header" id="header">
     <div class="container">
       <div class="header-inner">
         <a href="/" class="logo">
@@ -23,10 +26,11 @@
           <a href="/products?category=goodies">Goodies</a>
           <a href="/products?category=keychains">Keychains</a>
           <a href="/products?category=photos">Photos</a>
+          <a href="/admin">Orders</a>
         </nav>
         <div class="header-actions">
           <a href="/cart" class="cart-link">
-            <span class="cart-icon">🛒</span>
+            🛒
             <span class="cart-badge" id="cart-count"><%= typeof cartCount !== 'undefined' ? cartCount : 0 %></span>
           </a>
           <button class="menu-toggle" id="menuToggle" aria-label="Menu">☰</button>

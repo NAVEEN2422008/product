@@ -1,11 +1,11 @@
 <%- include('partials/header') %>
 
-<section class="section success-page">
+<section class="success-page">
   <div class="container">
     <div class="success-card">
       <div class="success-icon">✅</div>
       <h1>Order Confirmed!</h1>
-      <p>Thank you for your order, <strong><%= order.customer.name %></strong>!</p>
+      <p>Thank you, <strong><%= order.customer.name %></strong>! Your order is being processed.</p>
       <div class="order-details">
         <div class="order-detail-row">
           <span>Order ID</span>
@@ -17,7 +17,7 @@
         </div>
         <div class="order-detail-row">
           <span>Total</span>
-          <span class="order-total">₹<%= order.total.toLocaleString() %></span>
+          <span style="color: var(--primary-light); font-weight: 700;">₹<%= order.total.toLocaleString() %></span>
         </div>
         <div class="order-detail-row">
           <span>Payment</span>
@@ -28,7 +28,7 @@
           <span class="status-confirmed"><%= order.status %></span>
         </div>
       </div>
-      <h3>Items Ordered</h3>
+      <h3 style="font-size: 1rem; margin-bottom: 16px; text-align: left;">Items Ordered</h3>
       <div class="success-items">
         <% order.items.forEach(item => { %>
           <div class="success-item">

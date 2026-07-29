@@ -1,6 +1,6 @@
 <%- include('partials/header') %>
 
-<section class="section product-detail">
+<section class="product-detail-page">
   <div class="container">
     <a href="/products" class="back-link">← Back to Products</a>
     <div class="product-detail-layout">
@@ -15,8 +15,12 @@
           <span class="current current-lg">₹<%= product.price.toLocaleString() %></span>
           <% if (product.originalPrice > product.price) { %>
             <span class="original original-lg">₹<%= product.originalPrice.toLocaleString() %></span>
-            <span class="discount">Save ₹<%= (product.originalPrice - product.price).toLocaleString() %></span>
+            <span class="btn btn-sm" style="background: rgba(34,197,94,0.1); color: #22c55e; border: none; cursor: default; margin-left: 8px;">Save ₹<%= (product.originalPrice - product.price).toLocaleString() %></span>
           <% } %>
+        </div>
+        <div class="product-rating" style="margin: 12px 0;">
+          <span class="stars">★★★★★</span>
+          <span>4.9 (128 reviews)</span>
         </div>
         <p class="product-description"><%= product.description %></p>
 
@@ -37,7 +41,7 @@
                 <% product.colors.forEach(color => { %>
                   <label class="color-option">
                     <input type="radio" name="color" value="<%= color %>" <%= color === product.colors[0] ? 'checked' : '' %>>
-                    <span class="color-swatch" data-color="<%= color %>"><%= color %></span>
+                    <span class="color-swatch" style="color: <%= color.toLowerCase().includes('white') ? '#f1f5f9' : color.toLowerCase().includes('black') ? '#1a1a1a' : color.toLowerCase().includes('navy') ? '#1e3a5f' : color.toLowerCase().includes('red') ? '#dc2626' : color.toLowerCase().includes('blue') ? '#2563eb' : color.toLowerCase().includes('gray') ? '#6b7280' : color.toLowerCase().includes('maroon') ? '#800000' : color.toLowerCase().includes('gold') ? '#d4a017' : color.toLowerCase().includes('silver') ? '#c0c0c0' : color.toLowerCase().includes('brown') ? '#8b4513' : color.toLowerCase().includes('natural') ? '#d4c9a8' : color.toLowerCase().includes('clear') || color.toLowerCase().includes('transparent') ? '#ffffff' : '#8b5cf6' %>"><%= color %></span>
                   </label>
                 <% }) %>
               </div>
@@ -74,7 +78,7 @@
           <h3>Features</h3>
           <ul>
             <% product.features.forEach(f => { %>
-              <li>✓ <%= f %></li>
+              <li><%= f %></li>
             <% }) %>
           </ul>
         </div>
@@ -84,15 +88,21 @@
 </section>
 
 <% if (related.length > 0) { %>
-<section class="section related-section">
+<section class="section" style="background: var(--bg);">
   <div class="container">
-    <h2 class="section-title">Related Products</h2>
+    <div class="section-header">
+      <span class="section-label">Related</span>
+      <h2 class="section-title">You Might Also Like</h2>
+    </div>
     <div class="products-grid">
       <% related.forEach(product => { %>
-        <a href="/products/<%= product.id %>" class="product-card">
+        <a href="/products/<%= product.id %>" class="product-card tilt-card">
           <div class="product-image">
-            <img src="<%= product.image %>" alt="<%= product.name %>">
+            <img src="<%= product.image %>" alt="<%= product.name %>" loading="lazy">
             <% if (product.badge) { %><span class="badge"><%= product.badge %></span><% } %>
+            <div class="product-card-overlay">
+              <span class="quick-view-btn">Quick View</span>
+            </div>
           </div>
           <div class="product-info">
             <span class="product-category"><%= product.category %></span>
