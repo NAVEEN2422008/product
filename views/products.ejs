@@ -1,0 +1,64 @@
+<%- include('partials/header') %>
+
+<section class="section page-header">
+  <div class="container">
+    <h1>All Products</h1>
+    <p>Browse our collection of customizable products</p>
+  </div>
+</section>
+
+<section class="section products-page">
+  <div class="container">
+    <div class="products-layout">
+      <aside class="filters">
+        <h3>Categories</h3>
+        <ul class="filter-list">
+          <li><a href="/products" class="<%= currentCategory === 'all' ? 'active' : '' %>">All Products</a></li>
+          <% categories.forEach(cat => { %>
+            <li><a href="/products?category=<%= cat %>" class="<%= currentCategory === cat ? 'active' : '' %>"><%= cat.charAt(0).toUpperCase() + cat.slice(1) %></a></li>
+          <% }) %>
+        </ul>
+      </aside>
+      <div class="products-content">
+        <div class="products-toolbar">
+          <form class="search-form" method="GET" action="/products">
+            <% if (currentCategory !== 'all') { %>
+              <input type="hidden" name="category" value="<%= currentCategory %>">
+            <% } %>
+            <input type="text" name="search" placeholder="Search products..." value="<%= search %>">
+            <button type="submit">🔍</button>
+          </form>
+          <p><%= products.length %> product(s) found</p>
+        </div>
+        <% if (products.length === 0) { %>
+          <div class="empty-state">
+            <p>No products found. Try a different search or category.</p>
+          </div>
+        <% } else { %>
+          <div class="products-grid">
+            <% products.forEach(product => { %>
+              <a href="/products/<%= product.id %>" class="product-card">
+                <div class="product-image">
+                  <img src="<%= product.image %>" alt="<%= product.name %>">
+                  <% if (product.badge) { %><span class="badge"><%= product.badge %></span><% } %>
+                </div>
+                <div class="product-info">
+                  <span class="product-category"><%= product.category %></span>
+                  <h3><%= product.name %></h3>
+                  <div class="product-price">
+                    <span class="current">₹<%= product.price.toLocaleString() %></span>
+                    <% if (product.originalPrice > product.price) { %>
+                      <span class="original">₹<%= product.originalPrice.toLocaleString() %></span>
+                    <% } %>
+                  </div>
+                </div>
+              </a>
+            <% }) %>
+          </div>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

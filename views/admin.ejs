@@ -1,0 +1,58 @@
+<%- include('partials/header') %>
+
+<section class="section page-header">
+  <div class="container">
+    <h1>Order Management</h1>
+    <p>View and manage customer orders</p>
+  </div>
+</section>
+
+<section class="section admin-page">
+  <div class="container">
+    <% if (orders.length === 0) { %>
+      <div class="empty-state">
+        <h2>No orders yet</h2>
+        <p>Customer orders will appear here once they start placing orders.</p>
+        <a href="/" class="btn btn-primary">Back to Home</a>
+      </div>
+    <% } else { %>
+      <% orders.slice().reverse().forEach(order => { %>
+        <div class="order-card">
+          <div class="order-header">
+            <div>
+              <h3>Order #<%= order.id %></h3>
+              <span class="order-date"><%= order.date %></span>
+            </div>
+            <span class="order-status confirmed"><%= order.status %></span>
+          </div>
+          <div class="order-body">
+            <div class="order-info-group">
+              <h4>Customer</h4>
+              <p><%= order.customer.name %></p>
+              <p><%= order.customer.email %></p>
+              <p><%= order.customer.phone %></p>
+              <p><%= order.customer.address %>, <%= order.customer.city %> - <%= order.customer.pincode %></p>
+            </div>
+            <div class="order-info-group">
+              <h4>Items (<%= order.items.length %>)</h4>
+              <% order.items.forEach(item => { %>
+                <div class="order-item-row">
+                  <span><%= item.productName %></span>
+                  <span>× <%= item.quantity %></span>
+                  <span>₹<%= (item.productPrice * item.quantity).toLocaleString() %></span>
+                </div>
+              <% }) %>
+            </div>
+            <div class="order-info-group">
+              <h4>Payment</h4>
+              <p><%= order.paymentMethod %></p>
+              <p class="order-total">Total: ₹<%= order.total.toLocaleString() %></p>
+            </div>
+          </div>
+        </div>
+      <% }) %>
+    <% } %>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

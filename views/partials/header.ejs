@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CustomPrints - Personalized Products</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="header-inner">
+        <a href="/" class="logo">
+          <span class="logo-icon">✦</span>
+          <span class="logo-text">Custom<span>Prints</span></span>
+        </a>
+        <nav class="nav" id="nav">
+          <a href="/">Home</a>
+          <a href="/products">All Products</a>
+          <a href="/products?category=t-shirts">T-Shirts</a>
+          <a href="/products?category=goodies">Goodies</a>
+          <a href="/products?category=keychains">Keychains</a>
+          <a href="/products?category=photos">Photos</a>
+        </nav>
+        <div class="header-actions">
+          <a href="/cart" class="cart-link">
+            <span class="cart-icon">🛒</span>
+            <span class="cart-badge" id="cart-count"><%= typeof cartCount !== 'undefined' ? cartCount : 0 %></span>
+          </a>
+          <button class="menu-toggle" id="menuToggle" aria-label="Menu">☰</button>
+        </div>
+      </div>
+    </div>
+  </header>
+  <main class="main">

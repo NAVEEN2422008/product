@@ -1,0 +1,114 @@
+<%- include('partials/header') %>
+
+<section class="section product-detail">
+  <div class="container">
+    <a href="/products" class="back-link">← Back to Products</a>
+    <div class="product-detail-layout">
+      <div class="product-detail-image">
+        <img src="<%= product.image %>" alt="<%= product.name %>">
+        <% if (product.badge) { %><span class="badge badge-lg"><%= product.badge %></span><% } %>
+      </div>
+      <div class="product-detail-info">
+        <span class="product-category"><%= product.category %></span>
+        <h1><%= product.name %></h1>
+        <div class="product-price">
+          <span class="current current-lg">₹<%= product.price.toLocaleString() %></span>
+          <% if (product.originalPrice > product.price) { %>
+            <span class="original original-lg">₹<%= product.originalPrice.toLocaleString() %></span>
+            <span class="discount">Save ₹<%= (product.originalPrice - product.price).toLocaleString() %></span>
+          <% } %>
+        </div>
+        <p class="product-description"><%= product.description %></p>
+
+        <form class="customize-form" method="POST" action="/cart/add">
+          <input type="hidden" name="productId" value="<%= product.id %>">
+
+          <% if (product.customizable) { %>
+            <div class="form-group">
+              <label for="customText">Custom Text / Design Name</label>
+              <input type="text" id="customText" name="customText" placeholder="Enter your text here..." class="form-input">
+            </div>
+          <% } %>
+
+          <% if (product.colors) { %>
+            <div class="form-group">
+              <label>Color</label>
+              <div class="color-options">
+                <% product.colors.forEach(color => { %>
+                  <label class="color-option">
+                    <input type="radio" name="color" value="<%= color %>" <%= color === product.colors[0] ? 'checked' : '' %>>
+                    <span class="color-swatch" data-color="<%= color %>"><%= color %></span>
+                  </label>
+                <% }) %>
+              </div>
+            </div>
+          <% } %>
+
+          <% if (product.sizes) { %>
+            <div class="form-group">
+              <label>Size</label>
+              <div class="size-options">
+                <% product.sizes.forEach(size => { %>
+                  <label class="size-option">
+                    <input type="radio" name="size" value="<%= size %>" <%= size === 'M' ? 'checked' : '' %>>
+                    <span><%= size %></span>
+                  </label>
+                <% }) %>
+              </div>
+            </div>
+          <% } %>
+
+          <div class="form-group">
+            <label for="quantity">Quantity</label>
+            <div class="quantity-selector">
+              <button type="button" class="qty-btn" onclick="decrementQty()">−</button>
+              <input type="number" id="quantity" name="quantity" value="1" min="1" max="99">
+              <button type="button" class="qty-btn" onclick="incrementQty()">+</button>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-lg btn-block">Add to Cart — ₹<%= product.price.toLocaleString() %></button>
+        </form>
+
+        <div class="product-features">
+          <h3>Features</h3>
+          <ul>
+            <% product.features.forEach(f => { %>
+              <li>✓ <%= f %></li>
+            <% }) %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<% if (related.length > 0) { %>
+<section class="section related-section">
+  <div class="container">
+    <h2 class="section-title">Related Products</h2>
+    <div class="products-grid">
+      <% related.forEach(product => { %>
+        <a href="/products/<%= product.id %>" class="product-card">
+          <div class="product-image">
+            <img src="<%= product.image %>" alt="<%= product.name %>">
+            <% if (product.badge) { %><span class="badge"><%= product.badge %></span><% } %>
+          </div>
+          <div class="product-info">
+            <span class="product-category"><%= product.category %></span>
+            <h3><%= product.name %></h3>
+            <div class="product-price">
+              <span class="current">₹<%= product.price.toLocaleString() %></span>
+              <% if (product.originalPrice > product.price) { %>
+                <span class="original">₹<%= product.originalPrice.toLocaleString() %></span>
+              <% } %>
+            </div>
+          </div>
+        </a>
+      <% }) %>
+    </div>
+  </div>
+</section>
+<% } %>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,106 @@
+<%- include('partials/header') %>
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <h1>Make It <span>Yours</span></h1>
+      <p>Custom printed t-shirts, mugs, keychains, photo prints & more — all personalized just for you.</p>
+      <div class="hero-actions">
+        <a href="/products" class="btn btn-primary">Start Customizing</a>
+        <a href="/products?category=t-shirts" class="btn btn-outline">Explore T-Shirts</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card hero-card-1">👕 Custom T-Shirts</div>
+      <div class="hero-card hero-card-2">☕ Photo Mugs</div>
+      <div class="hero-card hero-card-3">🔑 Name Keychains</div>
+      <div class="hero-card hero-card-4">🖼️ Photo Prints</div>
+    </div>
+  </div>
+</section>
+
+<section class="section categories-section">
+  <div class="container">
+    <h2 class="section-title">Shop by Category</h2>
+    <div class="categories-grid">
+      <a href="/products?category=t-shirts" class="category-card" style="--cat-color: #6366f1">
+        <span class="cat-icon">👕</span>
+        <h3>T-Shirts & Hoodies</h3>
+        <p>Custom printed apparel</p>
+      </a>
+      <a href="/products?category=goodies" class="category-card" style="--cat-color: #ec4899">
+        <span class="cat-icon">🎁</span>
+        <h3>Printer Goodies</h3>
+        <p>Mugs, cases, bags & more</p>
+      </a>
+      <a href="/products?category=keychains" class="category-card" style="--cat-color: #f59e0b">
+        <span class="cat-icon">🔑</span>
+        <h3>Name Keychains</h3>
+        <p>Personalized keychains</p>
+      </a>
+      <a href="/products?category=photos" class="category-card" style="--cat-color: #10b981">
+        <span class="cat-icon">🖼️</span>
+        <h3>Photo Prints</h3>
+        <p>Prints, frames & calendars</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section featured-section">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Featured Products</h2>
+      <a href="/products" class="btn btn-outline btn-sm">View All →</a>
+    </div>
+    <div class="products-grid">
+      <% products.forEach(product => { %>
+        <a href="/products/<%= product.id %>" class="product-card">
+          <div class="product-image">
+            <img src="<%= product.image %>" alt="<%= product.name %>">
+            <% if (product.badge) { %><span class="badge"><%= product.badge %></span><% } %>
+          </div>
+          <div class="product-info">
+            <span class="product-category"><%= product.category %></span>
+            <h3><%= product.name %></h3>
+            <div class="product-price">
+              <span class="current">₹<%= product.price.toLocaleString() %></span>
+              <% if (product.originalPrice > product.price) { %>
+                <span class="original">₹<%= product.originalPrice.toLocaleString() %></span>
+              <% } %>
+            </div>
+          </div>
+        </a>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<section class="section features-section">
+  <div class="container">
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🎨</div>
+        <h3>Custom Designs</h3>
+        <p>Upload your own designs or choose from templates</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🚚</div>
+        <h3>Free Delivery</h3>
+        <p>Free shipping on orders above ₹499</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💯</div>
+        <h3>Premium Quality</h3>
+        <p>High-quality materials & vibrant prints</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">↩️</div>
+        <h3>Easy Returns</h3>
+        <p>7-day return policy on all products</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') %>
